@@ -957,6 +957,44 @@ h3 {
 .project-card {
   padding: 24px;
   border-radius: 26px;
+
+  opacity: 0;
+  transform: translateY(32px) scale(0.975);
+  filter: blur(5px);
+
+  transition:
+    opacity 560ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 680ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 560ms ease,
+    box-shadow 260ms ease,
+    border-color 260ms ease;
+
+  transition-delay:
+    calc(var(--project-reverse-index, 0) * 100ms);
+
+  will-change: opacity, transform, filter;
+}
+
+/* Cards begin above their final position when scrolling upward. */
+#projects[data-project-direction="up"] .project-card {
+  transform: translateY(-32px) scale(0.975);
+}
+
+/* Normal order when scrolling down: 1, 2, 3. */
+#projects.projects-visible .project-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+
+  transition-delay:
+    calc(var(--project-index, 0) * 120ms);
+}
+
+/* Reverse order when scrolling up: 3, 2, 1. */
+#projects.projects-visible[data-project-direction="up"]
+.project-card {
+  transition-delay:
+    calc(var(--project-reverse-index, 0) * 120ms);
 }
 
 .project-kicker {
@@ -1521,6 +1559,11 @@ h3 {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+    #projects .project-card {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    }
   }
 
   *,

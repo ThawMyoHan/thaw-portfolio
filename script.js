@@ -17,7 +17,6 @@ const projectCards = [...document.querySelectorAll('#projects .project-card')];
 
 let previousProjectScrollY = window.scrollY;
 let projectsWereInView = false;
-
 const THEME_TRANSITION_MS = 920;
 
 let scrollRafId = 0;
@@ -523,6 +522,53 @@ function updateRevealMotion() {
   });
 }
 
+// Animate project cards in sequence based on scroll direction.
+function updateProjectCardMotion() {
+  if (!projectsSection || projectCards.length === 0) {
+    return;
+  }
+
+  if (prefersReducedMotion) {
+    projectsSection.classList.add('projects-visible');
+    return;
+  }
+
+  const currentScrollY = window.scrollY;
+  const isScrollingUp = currentScrollY < previousProjectScrollY;
+  const rect = projectsSection.getBoundingClientRect();
+  const viewportHeight = window.innerHeight;
+
+  const isInView =
+    rect.top < viewportHeight * 0.82 &&
+    rect.bottom > viewportHeight * 0.18;
+
+  projectsSection.dataset.projectDirection =
+    isScrollingUp ? 'up' : 'down';
+
+  if (isInView !== projectsWereInView) {
+    projectsSection.classList.toggle(
+      'projects-visible',
+      isInView
+    );
+
+    projectsWereInView = isInView;
+  }
+
+  previousProjectScrollY = currentScrollY;
+}
+
+projectCards.forEach((card, index) => {
+  card.style.setProperty(
+    '--project-index',
+    String(index)
+  );
+
+  card.style.setProperty(
+    '--project-reverse-index',
+    String(projectCards.length - 1 - index)
+  );
+});
+
 // Give the background blobs a light parallax drift as the page scrolls.
 function updateBackdropMotion() {
   const scrollY = window.scrollY;
@@ -676,6 +722,7 @@ function updateTopbarMotion() {
 // Run both motion systems together so they stay in sync.
 function updateMotion() {
   updateRevealMotion();
+  updateProjectCardMotion();
   updateBackdropMotion();
   updateTopbarMotion();
 }
