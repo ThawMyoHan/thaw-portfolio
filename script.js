@@ -522,52 +522,80 @@ function updateRevealMotion() {
   });
 }
 
-// Animate project cards in sequence based on scroll direction.
-function updateProjectCardMotion() {
+// Animate project cards when the Projects section enters the viewport.
+function initializeProjectCardAnimations() {
   if (!projectsSection || projectCards.length === 0) {
     return;
   }
 
+  // Show everything without animation when reduced motion is enabled.
   if (prefersReducedMotion) {
-    projectsSection.classList.add('projects-visible');
+    projectCards.forEach((card) => {
+      card.classList.add('is-project-visible');
+    });
+
     return;
   }
 
-  const currentScrollY = window.scrollY;
-  const isScrollingUp = currentScrollY < previousProjectScrollY;
-  const rect = projectsSection.getBoundingClientRect();
-  const viewportHeight = window.innerHeight;
+  let lastScrollY = window.scrollY;
+  let isScrollingUp = false;
+  let animationTimers = [];
 
-  const isInView =
-    rect.top < viewportHeight * 0.82 &&
-    rect.bottom > viewportHeight * 0.18;
+  // Track whether the visitor is scrolling up or down.
+  window.addEventListener(
+    'scroll',
+    () => {
+      isScrollingUp = window.scrollY < lastScrollY;
+      lastScrollY = window.scrollY;
+    },
+    { passive: true }
+  );
 
-  projectsSection.dataset.projectDirection =
-    isScrollingUp ? 'up' : 'down';
+  function clearAnimationTimers() {
+    animationTimers.forEach((timer) => {
+      window.clearTimeout(timer);
+    });
 
-  if (isInView !== projectsWereInView) {
-    projectsSection.classList.toggle(
-      'projects-visible',
-      isInView
-    );
-
-    projectsWereInView = isInView;
+    animationTimers = [];
   }
 
-  previousProjectScrollY = currentScrollY;
+  const projectObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        clearAnimationTimers();
+
+        projectsSection.dataset.projectDirection =
+          isScrollingUp ? 'up' : 'down';
+
+        // Normal order going down; reverse order going up.
+        const orderedCards = isScrollingUp
+          ? [...projectCards].reverse()
+          : projectCards;
+
+        orderedCards.forEach((card, index) => {
+          const delay = entry.isIntersecting
+            ? index * 180
+            : index * 110;
+
+          const timer = window.setTimeout(() => {
+            card.classList.toggle(
+              'is-project-visible',
+              entry.isIntersecting
+            );
+          }, delay);
+
+          animationTimers.push(timer);
+        });
+      });
+    },
+    {
+      threshold: 0.18,
+      rootMargin: '0px 0px -8% 0px'
+    }
+  );
+
+  projectObserver.observe(projectsSection);
 }
-
-projectCards.forEach((card, index) => {
-  card.style.setProperty(
-    '--project-index',
-    String(index)
-  );
-
-  card.style.setProperty(
-    '--project-reverse-index',
-    String(projectCards.length - 1 - index)
-  );
-});
 
 // Give the background blobs a light parallax drift as the page scrolls.
 function updateBackdropMotion() {
@@ -722,7 +750,6 @@ function updateTopbarMotion() {
 // Run both motion systems together so they stay in sync.
 function updateMotion() {
   updateRevealMotion();
-  updateProjectCardMotion();
   updateBackdropMotion();
   updateTopbarMotion();
 }
@@ -805,4 +832,5 @@ prefersDarkQuery.addEventListener('change', (event) => {
 
 initializeTheme();
 initializeSplitButtonAnimations();
+initializeProjectCardAnimations();
 updateMotion();

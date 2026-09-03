@@ -969,32 +969,19 @@ h3 {
     box-shadow 260ms ease,
     border-color 260ms ease;
 
-  transition-delay:
-    calc(var(--project-reverse-index, 0) * 100ms);
-
   will-change: opacity, transform, filter;
 }
 
 /* Cards begin above their final position when scrolling upward. */
-#projects[data-project-direction="up"] .project-card {
+#projects[data-project-direction="up"] .project-card:not(.is-project-visible) {
   transform: translateY(-32px) scale(0.975);
 }
 
-/* Normal order when scrolling down: 1, 2, 3. */
-#projects.projects-visible .project-card {
+/* JavaScript applies this class to each card in sequence. */
+#projects .project-card.is-project-visible {
   opacity: 1;
   transform: translateY(0) scale(1);
   filter: blur(0);
-
-  transition-delay:
-    calc(var(--project-index, 0) * 120ms);
-}
-
-/* Reverse order when scrolling up: 3, 2, 1. */
-#projects.projects-visible[data-project-direction="up"]
-.project-card {
-  transition-delay:
-    calc(var(--project-reverse-index, 0) * 120ms);
 }
 
 .project-kicker {
