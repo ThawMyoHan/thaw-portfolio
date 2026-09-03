@@ -1362,10 +1362,18 @@ h3 {
 @media (max-width: 640px) {
   .topbar {
     top: max(10px, env(safe-area-inset-top));
-    padding: 8px;
+    width: min(calc(100% - 28px), 360px);
+    padding: 8px 10px;
     flex-direction: row;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
+    gap: 10px;
+    border-radius: 22px;
+  }
+
+  .topbar.is-combined {
+    width: min(calc(100% - 28px), 360px);
+    justify-content: space-between;
   }
 
   .topbar.is-separated .brand,
@@ -1382,14 +1390,17 @@ h3 {
   }
 
   .brand {
-    width: 44px;
+    width: auto;
+    min-width: 94px;
     height: 44px;
+    padding-inline: 18px;
     border-radius: 13px;
   }
 
   .theme-toggle {
+    min-width: 104px;
     min-height: 44px;
-    padding-inline: 15px;
+    padding-inline: 18px;
   }
 
   .page {
