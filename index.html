@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A polished personal portfolio example for a CSULB student."
+    />
+    <title>Thaw Han | CSULB Portfolio</title>
+    <!-- Pick the initial theme before the page paints so there is no flash. -->
+    <script>
+      (() => {
+        const storedTheme = localStorage.getItem('portfolio-theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = storedTheme || (systemPrefersDark ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <div class="backdrop backdrop-one"></div>
+    <div class="backdrop backdrop-two"></div>
+
+    <!-- Top navigation and theme control. -->
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Go to top">Home</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+        Light
+      </button>
+    </header>
+
+    <!-- Main portfolio content. -->
+    <main id="home" class="page">
+      <!-- Hero section. -->
+      <section class="hero">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">My Portfolio</p>
+          <h1>Thaw Han</h1>
+          <p class="lede">
+            I am a student at California State University, Long Beach studying computer engineering, and computer science. I'm into coding, with having an intermediate experience in coding websites, and I'm looking into mobile app development, as well as learning more about artificial intelligence, data science, and OpenACC and CUDA C/C++.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#projects">See projects</a>
+            <a class="button secondary" href="#contact">Contact me</a>
+          </div>
+          <dl class="stats">
+            <div>
+              <dt>Focus</dt>
+              <dd>Frontend development</dd>
+            </div>
+            <div>
+              <dt>Based at</dt>
+              <dd>CSULB, Long Beach</dd>
+            </div>
+            <div>
+              <dt>Currently</dt>
+              <dd>Building portfolio projects</dd>
+            </div>
+          </dl>
+
+          <!-- Music player (official Spotify embed). -->
+          <div class="music-player">
+            <p class="music-player-label">Favorite song:</p>
+            <iframe
+              data-testid="embed-iframe"
+              style="border-radius: 12px"
+              src="https://open.spotify.com/embed/track/3hEfpBHxgieRLz4t3kLNEg?utm_source=generator&si=7d4908ca7f6a4b74"
+              width="100%"
+              height="152"
+              frameborder="0"
+              allowfullscreen
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+
+        <aside class="hero-card reveal">
+          <div class="profile-badge">Available for internships</div>
+          <div class="portrait">
+            <div class="portrait-inner">
+              <img src="assets/profile-photo.jpg" alt="Thaw Han" class="portrait-photo" />
+            </div>
+          </div>
+
+          <p class="card-title">A student who likes practical systems and elegant interfaces.</p>
+          <ul class="card-list">
+            <li>Web apps</li>
+            <li>UI design</li>
+            <li>JavaScript</li>
+            <li>Team projects</li>
+          </ul>
+        </aside>
+      </section>
+
+      <!-- About section. -->
+      <section id="about" class="section reveal">
+        <div class="section-heading">
+          <h2 class="section-heading-accent">About</h2>
+        </div>
+        <div class="split">
+          <p>
+            I'm a Computer Science student at California State University, Long Beach, expecting
+            to graduate in January 2028. I work mainly in Python, Java, C++, and SQL, and I'm
+            comfortable moving between systems-level programming, like the shared memory and
+            semaphore work in my Dungeon Concurrency Lab, and everyday web development with HTML,
+            CSS, and JavaScript. I'm currently looking for an internship or entry-level role in
+            software development, data analysis, or IT support, where I can keep sharpening those
+            skills on real problems.
+          </p>
+          <p>
+            Outside of coursework, I've picked up a mix of technical and people-facing experience:
+            serving as Secretary for CSULB's Badminton Club, supporting event setup and facility
+            operations as a Student Assistant with CSULB ASI, and volunteering with organizations
+            like the Theravada Buddhist Society of America and Mary Chapman for the Deaf. That
+            combination taught me to stay organized, communicate clearly, and work well with
+            people from different backgrounds, skills I try to carry into every project I build.
+          </p>
+        </div>
+      </section>
+
+      <!-- Project highlights. -->
+      <section id="projects" class="section reveal">
+        <div class="section-heading">
+          <h2 class="section-heading-accent">Projects</h2>
+        </div>
+        <div class="grid">
+          <article class="project-card">
+            <p class="project-kicker">01 / Systems</p>
+            <h3>Dungeon Concurrency Lab</h3>
+            <p>
+              A concurrent processing assignment built with shared memory, signals, and semaphores.
+              It coordinates multiple processes in a dungeon-style game workflow.
+            </p>
+            <p class="project-impact">
+              Impact: helped me practice inter-process communication, synchronization, and Linux
+              systems programming.
+            </p>
+            <div class="tag-row">
+              <span>C</span>
+              <span>POSIX</span>
+              <span>Shared Memory</span>
+            </div>
+            <div class="project-links">
+              <button class="project-link source-link" type="button" data-project="dungeon" data-view="source">Source code</button>
+              <button class="project-link" type="button" data-project="dungeon" data-view="notes">Project notes</button>
+            </div>
+          </article>
+          <article class="project-card">
+            <p class="project-kicker">02 / Algorithms</p>
+            <h3>Generic Sorting Showcase</h3>
+            <p>
+              A generic sorting assignment in C# that sorts numbers and people with custom
+              comparison logic.
+            </p>
+            <p class="project-impact">
+              Impact: strengthened my understanding of generics, sorting callbacks, and clean data
+              formatting in .NET.
+            </p>
+            <div class="tag-row">
+              <span>C#</span>
+              <span>Generic Sort</span>
+              <span>.NET</span>
+            </div>
+            <div class="project-links">
+              <button class="project-link source-link" type="button" data-project="sorting" data-view="source">Source code</button>
+              <button class="project-link" type="button" data-project="sorting" data-view="notes">Console output</button>
+            </div>
+          </article>
+          <article class="project-card">
+            <p class="project-kicker">03 / Frontend</p>
+            <h3>Valentine Site</h3>
+            <p>
+              A small interactive website with HTML, CSS, and JavaScript to create a playful
+              themed experience.
+            </p>
+            <p class="project-impact">
+              Impact: gave me a small but complete frontend project with interaction, styling, and
+              layout work.
+            </p>
+            <div class="tag-row">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>Responsive</span>
+            </div>
+            <div class="project-links">
+              <button class="project-link" type="button" data-project="valentine" data-view="source">Live demo</button>
+              <button class="project-link source-link" type="button" data-project="valentine" data-view="notes">Source files</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Timeline-style experience section. -->
+      <section id="experience" class="section reveal">
+        <div class="section-heading">
+          <h2 class="section-heading-theme">Experience Highlights</h2>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="timeline-year">2026</span>
+            <div>
+              <h3>CSULB ASI | Facilities Services Student Assistant</h3>
+              <p>
+                Long Beach, CA | May 2026 - Present
+              </p>
+              <ul class="timeline-bullets">
+                <li>Support daily event setup and breakdown across ASI spaces, including arranging tables, chairs, staging, and related equipment to match event diagrams and timelines.</li>
+                <li>Use EMS scheduling tools and operational reports to review event requests, prioritize shift tasks, and confirm spaces are prepared according to plan.</li>
+                <li>Complete routine facility support tasks, including cleaning and resetting shared areas, to maintain a safe, professional, and guest-ready environment.</li>
+                <li>Assist with moving and repositioning furniture and equipment for campus programs while following safety procedures and team direction.</li>
+                <li>Maintain organized storage and supply areas by tracking equipment condition, reporting maintenance needs, and helping keep inventory accessible.</li>
+                <li>Provide clear shift updates and collaborate with staff and student teams to resolve setup issues quickly and keep events running smoothly.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-year">2024</span>
+            <div>
+              <h3>Badminton Club | Secretary</h3>
+              <p>
+                Long Beach, CA | Jan 2024 - Present
+              </p>
+              <ul class="timeline-bullets">
+                <li>Managed membership registration on DSE and fee tracking using Microsoft Excel.</li>
+                <li>Coordinated game events and ensured participant approvals for transportation and physical form submissions.</li>
+                <li>Designed promotional flyers and announcements using Google Forms and Adobe Illustrator.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-year">2022</span>
+            <div>
+              <h3>Tai Hwa Soybean &amp; Paste Company | Secretary</h3>
+              <p>
+                Yangon, Myanmar | Aug 2022 - Feb 2023
+              </p>
+              <ul class="timeline-bullets">
+                <li>Maintained 50+ financial transaction records, ensuring accurate income and expense tracking.</li>
+                <li>Organized employee records to improve performance monitoring and efficiency.</li>
+                <li>Assisted in order processing and quality control for product manufacturing.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-heading" style="margin-top: 32px;">
+          <h2 class="section-heading-theme">Volunteering Work</h2>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="timeline-year">2024</span>
+            <div>
+              <h3>Theravada Buddhist Society of America (TBSA)</h3>
+              <p>
+                Half Moon Bay, CA | Jul 2024 - Aug 2024
+              </p>
+              <ul class="timeline-bullets">
+                <li>Assisted in planning and organizing cultural and community events.</li>
+                <li>Taught students fundamental concepts of Buddhism.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-year">2022</span>
+            <div>
+              <h3>Mary Chapman for the Deaf</h3>
+              <p>
+                Yangon, Myanmar | May 2022 - Aug 2022
+              </p>
+              <ul class="timeline-bullets">
+                <li>Coordinated logistics for community activities and events.</li>
+                <li>Facilitated communication with individuals with hearing impairments.</li>
+                <li>Conducted basic health checkups and supported small business operations.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact section. -->
+      <section id="contact" class="section contact reveal">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Let us connect</h2>
+          <p>
+            Replace these links with your own email, GitHub, and LinkedIn profiles when you are
+            ready.
+          </p>
+        </div>
+        <div class="contact-actions">
+          <a
+            class="button primary"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=thawmyohan52@gmail.com"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Email me
+          </a>
+          <a class="button secondary" href="https://github.com/ThawMyoHan" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="button secondary" href="https://www.linkedin.com/in/thaw-han-662644333/" target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Simple footer note. -->
+    <footer class="footer">
+      <p class="footer-note">Designed and built by Thaw Myo Han.</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </footer>
+
+    <!-- Subtle floating mascot pinned to the lower corner. -->
+    <div class="mascot-dancer" aria-hidden="true">
+      <img src="assets/csulb-shark-logo.png" alt="" />
+    </div>
+
+    <!-- Project viewer modal. -->
+    <div class="project-modal" hidden aria-hidden="true">
+      <div class="project-modal-backdrop" data-close-project-modal></div>
+      <section class="project-modal-panel" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+        <div class="project-modal-header">
+          <div>
+            <p class="project-modal-kicker" id="project-modal-kicker">Project files</p>
+            <h3 id="project-modal-title">Project title</h3>
+          </div>
+          <button class="project-modal-close" type="button" data-close-project-modal aria-label="Close project viewer">&times;</button>
+        </div>
+        <p class="project-modal-summary" id="project-modal-summary"></p>
+        <div class="project-modal-meta">
+          <span id="project-modal-path" class="project-modal-path"></span>
+          <span id="project-modal-label"></span>
+        </div>
+        <pre class="project-modal-code"><code id="project-modal-code"></code></pre>
+      </section>
+    </div>
+  </body>
+</html>
