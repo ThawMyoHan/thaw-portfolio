@@ -32,7 +32,7 @@
   --glass-rim-strong: rgba(255, 255, 255, 0.78);
   --glass-shadow: 0 26px 56px rgba(15, 33, 58, 0.14);
   --theme-transition-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --theme-transition-duration: 920ms;
+  --theme-transition-duration: 1600ms;
 }
 
 /* Dark theme overrides, applied through data-theme. */

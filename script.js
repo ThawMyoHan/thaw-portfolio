@@ -17,7 +17,7 @@ const projectCards = [...document.querySelectorAll('#projects .project-card')];
 
 let previousProjectScrollY = window.scrollY;
 let projectsWereInView = false;
-const THEME_TRANSITION_MS = 920;
+const THEME_TRANSITION_MS = 1600;
 
 let scrollRafId = 0;
 let topbarIdleTimerId = 0;
