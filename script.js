@@ -574,8 +574,8 @@ function initializeProjectCardAnimations() {
 
         orderedCards.forEach((card, index) => {
           const delay = entry.isIntersecting
-            ? index * 180
-            : index * 110;
+            ? index * 300
+            : index * 220;
 
           const timer = window.setTimeout(() => {
             card.classList.toggle(
