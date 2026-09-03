@@ -82,6 +82,8 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
+  min-width: 0;
+  overflow-x: hidden;
   background:
     radial-gradient(circle at 8% -8%, rgba(255, 255, 255, 0.38), transparent 34%),
     radial-gradient(circle at 92% -10%, rgba(0, 113, 227, 0.14), transparent 26%),
@@ -1359,28 +1361,147 @@ h3 {
 
 @media (max-width: 640px) {
   .topbar {
-    padding-top: 16px;
-    flex-direction: column;
-    align-items: start;
+    top: max(10px, env(safe-area-inset-top));
+    padding: 8px;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .topbar.is-separated .brand,
+  .topbar.is-separated .theme-toggle {
+    top: max(10px, env(safe-area-inset-top));
+  }
+
+  .topbar.is-separated .brand {
+    left: max(10px, env(safe-area-inset-left));
+  }
+
+  .topbar.is-separated .theme-toggle {
+    right: max(10px, env(safe-area-inset-right));
+  }
+
+  .brand {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+  }
+
+  .theme-toggle {
+    min-height: 44px;
+    padding-inline: 15px;
   }
 
   .page {
-    padding-inline: 16px;
+    width: 100%;
+    padding: calc(88px + env(safe-area-inset-top)) 14px 52px;
   }
 
   .hero-copy,
   .hero-card,
   .section {
-    padding: 22px;
-    border-radius: 26px;
+    min-width: 0;
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .hero {
+    gap: 18px;
+    padding-top: 0;
+  }
+
+  h1 {
+    max-width: none;
+    font-size: clamp(2.75rem, 15vw, 4.25rem);
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 9vw, 2.35rem);
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  .lede,
+  .split {
+    font-size: 1rem;
   }
 
   .section {
     margin-top: 38px;
   }
 
+  .hero-actions,
+  .contact-actions,
+  .project-links {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .button,
+  .project-links button {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .stats {
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .stats div,
+  .project-card {
+    padding: 18px;
+  }
+
+  .portrait {
+    max-height: 72vh;
+  }
+
+  .music-player {
+    padding: 8px;
+  }
+
+  .project-modal {
+    align-items: end;
+    padding: max(10px, env(safe-area-inset-top)) 10px max(10px, env(safe-area-inset-bottom));
+  }
+
+  .project-modal-panel {
+    max-height: calc(100dvh - 20px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    padding: 18px;
+    border-radius: 22px;
+    overscroll-behavior: contain;
+  }
+
+  .project-modal-header {
+    gap: 10px;
+  }
+
+  .project-modal-meta {
+    display: grid;
+  }
+
+  .project-modal-meta span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .project-modal-code {
+    max-width: 100%;
+    padding: 14px;
+    border-radius: 18px;
+  }
+
   .footer-nav {
     gap: 12px;
+  }
+
+  .footer {
+    padding: 0 14px calc(28px + env(safe-area-inset-bottom));
   }
 
   .timeline-item {
@@ -1389,11 +1510,43 @@ h3 {
   }
 
   .mascot-dancer {
-    right: 10px;
-    bottom: 10px;
+    right: max(8px, env(safe-area-inset-right));
+    bottom: max(8px, env(safe-area-inset-bottom));
     width: 52px;
     height: 52px;
     opacity: 0.74;
+  }
+}
+
+@media (max-width: 380px) {
+  .page {
+    padding-inline: 10px;
+  }
+
+  .hero-copy,
+  .hero-card,
+  .section {
+    padding: 17px;
+  }
+
+  .section-heading-accent {
+    font-size: 2rem;
+  }
+
+  .tag-row {
+    gap: 7px;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .hero-card:hover,
+  .hero-copy:hover,
+  .project-card:hover,
+  .section:hover,
+  .contact:hover,
+  .button:hover,
+  .project-links button:hover {
+    transform: none;
   }
 }
 
