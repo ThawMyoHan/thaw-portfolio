@@ -12,6 +12,12 @@ const projectModalCode = document.getElementById('project-modal-code');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const prefersDarkQuery = window.matchMedia('(prefers-color-scheme: dark)');
 const splitButtonGroups = document.querySelectorAll('.hero-actions, .contact-actions, .project-links');
+const projectsSection = document.getElementById('projects');
+const projectCards = [...document.querySelectorAll('#projects .project-card')];
+
+let previousProjectScrollY = window.scrollY;
+let projectsWereInView = false;
+
 const THEME_TRANSITION_MS = 920;
 
 let scrollRafId = 0;
