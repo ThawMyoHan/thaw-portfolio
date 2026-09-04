@@ -1590,7 +1590,18 @@ h3 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
+  gap: 8px;
+}
+
+.contact-button .contact-icon {
+  display: block;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px;
+  max-width: 18px;
+  flex: 0 0 18px;
+  object-fit: contain;
+  border-radius: 3px;
 }
 
 .contact-icon-wrapper {
